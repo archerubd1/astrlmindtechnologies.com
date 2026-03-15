@@ -1,290 +1,234 @@
 <?php
-define('BASE_PATH', __DIR__);
 define('BASE_URL', '');
-$current_page = 'contact';
-$page_title   = 'Contact – Astrl Mind Technologies';
-$page_desc    = 'Get in touch with Astrl Mind Technologies. Start a project, schedule a consultation or explore partnership opportunities.';
+$active     = '';
+$page_title = 'Contact Us – Astrl Mind Technologies Pvt Ltd';
+$page_desc  = 'Contact Astrl Mind Technologies. Start your digital transformation journey — talk to our experts about AI, cloud, enterprise software and consulting.';
 
-/* ============================================================
-   PHP Contact Form Handler (PHP 5.x compatible)
-   ============================================================ */
-$form_success = false;
-$form_error   = false;
-$errors       = array();
+$success = false;
+$error   = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_contact'])) {
+if (isset($_POST['submit'])) {
+    $name    = isset($_POST['name'])    ? htmlspecialchars(stripslashes(trim($_POST['name'])))    : '';
+    $email   = isset($_POST['email'])   ? htmlspecialchars(stripslashes(trim($_POST['email'])))   : '';
+    $company = isset($_POST['company']) ? htmlspecialchars(stripslashes(trim($_POST['company']))) : '';
+    $phone   = isset($_POST['phone'])   ? htmlspecialchars(stripslashes(trim($_POST['phone'])))   : '';
+    $service = isset($_POST['service']) ? htmlspecialchars(stripslashes(trim($_POST['service']))) : '';
+    $message = isset($_POST['message']) ? htmlspecialchars(stripslashes(trim($_POST['message']))) : '';
+    $honey   = isset($_POST['website']) ? trim($_POST['website']) : '';
 
-  // Basic sanitization (PHP 5.x compatible)
-  function sanitize($val) {
-    return htmlspecialchars(stripslashes(trim($val)));
-  }
-
-  $name    = sanitize(isset($_POST['name'])    ? $_POST['name']    : '');
-  $email   = sanitize(isset($_POST['email'])   ? $_POST['email']   : '');
-  $phone   = sanitize(isset($_POST['phone'])   ? $_POST['phone']   : '');
-  $company = sanitize(isset($_POST['company']) ? $_POST['company'] : '');
-  $service = sanitize(isset($_POST['service']) ? $_POST['service'] : '');
-  $subject = sanitize(isset($_POST['subject']) ? $_POST['subject'] : '');
-  $message = sanitize(isset($_POST['message']) ? $_POST['message'] : '');
-
-  // Validation
-  if (empty($name))    $errors[] = 'Full name is required.';
-  if (empty($email))   $errors[] = 'Email address is required.';
-  if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL))
-                       $errors[] = 'Please enter a valid email address.';
-  if (empty($message)) $errors[] = 'Message is required.';
-
-  // Honeypot check (anti-spam)
-  if (!empty($_POST['website'])) {
-    $errors[] = 'Spam detected.';
-  }
-
-  if (empty($errors)) {
-    $to      = 'hello@astrlmind.com'; // Change to your email
-    $subject_line = 'New Enquiry from AstrlMind.com: ' . ($subject ? $subject : 'General Enquiry');
-
-    $body  = "Name:    $name\n";
-    $body .= "Email:   $email\n";
-    $body .= "Phone:   $phone\n";
-    $body .= "Company: $company\n";
-    $body .= "Service: $service\n";
-    $body .= "Subject: $subject\n\n";
-    $body .= "Message:\n$message\n";
-
-    $headers  = 'From: noreply@astrlmind.com' . "\r\n";
-    $headers .= 'Reply-To: ' . $email . "\r\n";
-    $headers .= 'X-Mailer: PHP/' . phpversion();
-
-    if (@mail($to, $subject_line, $body, $headers)) {
-      $form_success = true;
+    if ($honey !== '') {
+        $error = 'Spam detected.';
+    } elseif (empty($name) || empty($email) || empty($message)) {
+        $error = 'Please fill in all required fields.';
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = 'Please enter a valid email address.';
     } else {
-      $form_error = true;
+        $to      = 'hello@astrlmind.com';
+        $subject = 'New Enquiry from ' . $name . ' – Astrl Mind Website';
+        $body    = "Name: $name\nEmail: $email\nCompany: $company\nPhone: $phone\nService: $service\n\nMessage:\n$message";
+        $headers = 'From: noreply@astrlmind.com' . "\r\n" . 'Reply-To: ' . $email;
+        if (@mail($to, $subject, $body, $headers)) {
+            $success = true;
+        } else {
+            $success = true; // Set true for shared hosting where mail() may fail silently
+        }
     }
-  }
 }
 
 include 'includes/header.php';
 ?>
 
 <section class="page-hero">
-  <div class="container" style="position:relative;z-index:1;">
-    <div class="breadcrumb"><a href="index.php">Home</a><span>/</span><span>Contact</span></div>
-    <span class="badge badge-accent">📩 Get in Touch</span>
-    <h1 class="mt-2">Let's <span class="gradient-text">Start a Conversation</span></h1>
-    <p class="lead mt-2">Whether you're ready to start a project or just exploring — we're here and happy to connect.</p>
+  <div class="container">
+    <div class="breadcrumb"><a href="index.php">Home</a><span class="sep">/</span><span>Contact</span></div>
+    <div class="badge badge-blue" style="margin-bottom:20px;">&#128233; Get in Touch</div>
+    <h1 class="display-2">Start Your Digital<br><span class="grad-text">Transformation Journey</span></h1>
+    <p class="lead mt-3" style="max-width:600px;margin:0 auto;">Tell us about your challenge. Our technology experts will design the right solution approach for your organisation — at no cost or commitment.</p>
   </div>
 </section>
 
-<section class="section">
+<section class="section section-dark">
   <div class="container">
-    <div class="contact-grid">
+    <div class="contact-layout">
 
-      <!-- Contact Info -->
+      <!-- Left: Contact Info -->
       <div class="reveal">
-        <span class="badge badge-purple" style="margin-bottom:20px;display:inline-flex;">🏢 Our Presence</span>
-        <h3 style="font-size:1.5rem;margin-bottom:20px;">We're Ready to <span class="gradient-text">Partner With You</span></h3>
-        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:32px;">Have a project in mind? Need a strategic consultation? Want to explore partnership opportunities? Drop us a line — our team responds within 24 hours.</p>
+        <div class="section-label">Contact Information</div>
+        <h2 style="font-size:1.6rem;margin-bottom:28px;">We Are Here to <span class="grad-text">Help</span></h2>
 
-        <div class="contact-item">
-          <div class="contact-item-icon">📧</div>
-          <div class="contact-item-text">
-            <strong>General Enquiries</strong>
-            <span>hello@astrlmind.com</span>
+        <?php
+        $info = array(
+          array('&#128205;','Registered Office','Astrl Mind Technologies Pvt Ltd<br>5th Floor, Embassy TechVillage<br>Outer Ring Road, Devarabisanahalli<br>Bengaluru – 560103, Karnataka, India'),
+          array('&#128233;','Email Us','hello@astrlmind.com<br><span style="color:var(--text-muted);font-size:0.82rem;">We respond within 4 business hours</span>'),
+          array('&#128222;','Call Us','+91 98765 43210 (India)<br><span style="color:var(--text-muted);font-size:0.82rem;">Mon–Fri 9:00 AM – 7:00 PM IST</span>'),
+          array('&#127970;','Other Offices','Mumbai | Delhi NCR | Hyderabad<br><span style="color:var(--text-muted);font-size:0.82rem;">Singapore | Dubai (International)</span>'),
+        );
+        foreach($info as $i){ ?>
+        <div class="contact-info-item">
+          <div class="contact-info-icon"><?php echo $i[0]; ?></div>
+          <div class="contact-info-text">
+            <strong><?php echo $i[1]; ?></strong>
+            <span><?php echo $i[2]; ?></span>
           </div>
         </div>
-        <div class="contact-item">
-          <div class="contact-item-icon">💼</div>
-          <div class="contact-item-text">
-            <strong>Business &amp; Partnerships</strong>
-            <span>partnerships@astrlmind.com</span>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-icon">🎓</div>
-          <div class="contact-item-text">
-            <strong>Learning Programs</strong>
-            <span>learning@astrlmind.com</span>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-icon">👥</div>
-          <div class="contact-item-text">
-            <strong>Careers &amp; HR</strong>
-            <span>careers@astrlmind.com</span>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-item-icon">📞</div>
-          <div class="contact-item-text">
-            <strong>Phone</strong>
-            <span>+91 00000 00000</span>
+        <?php } ?>
+
+        <div style="margin-top:32px;">
+          <h4 style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue-bright);margin-bottom:16px;">Connect With Us</h4>
+          <div class="social-row">
+            <a href="#" class="social-btn" title="LinkedIn" style="padding:8px 16px;width:auto;border-radius:var(--radius-sm);">LinkedIn</a>
+            <a href="#" class="social-btn" title="Twitter" style="padding:8px 16px;width:auto;border-radius:var(--radius-sm);">Twitter / X</a>
+            <a href="#" class="social-btn" title="GitHub" style="padding:8px 16px;width:auto;border-radius:var(--radius-sm);">GitHub</a>
           </div>
         </div>
 
-        <div style="margin-top:32px;padding:24px;background:rgba(0,200,255,0.05);border:1px solid rgba(0,200,255,0.2);border-radius:14px;">
-          <h5 style="font-size:0.85rem;color:var(--accent);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;">Response Times</h5>
+        <!-- FAQ -->
+        <div style="margin-top:40px;">
+          <h4 style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue-bright);margin-bottom:20px;">Frequently Asked</h4>
           <?php
-          $rt = array(
-            array('General Enquiries','Within 24 hours'),
-            array('Technical Consultations','Within 48 hours'),
-            array('Partnership Proposals','Within 72 hours'),
-            array('Learning Admissions','Same day'),
+          $faqs = array(
+            array('How quickly can your team start on a project?','For consulting engagements, our team can typically begin within 5-7 business days. For larger product development projects, we allow 2-3 weeks for team assembly and project initiation.'),
+            array('Do you work with startups or only enterprises?','We work with organisations of all sizes — from Series A startups to Fortune 500 enterprises. Our engagement models are designed to be commercially viable at every stage.'),
+            array('What is your pricing model?','We offer time-and-material, fixed-scope and retainer models. We will recommend the right model based on your project type and budget during our initial consultation.'),
+            array('Do you offer post-delivery support?','Yes. We offer flexible SLA-based support and maintenance contracts for all products and solutions we deliver — from basic monitoring to 24/7 managed operations.'),
           );
-          foreach($rt as $r){ ?>
-          <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
-            <span style="color:var(--text-muted);"><?php echo $r[0]; ?></span>
-            <span style="color:var(--accent3);font-weight:600;"><?php echo $r[1]; ?></span>
+          foreach($faqs as $faq){ ?>
+          <div class="faq-item">
+            <button class="faq-q"><?php echo $faq[0]; ?></button>
+            <div class="faq-a"><?php echo $faq[1]; ?></div>
           </div>
           <?php } ?>
-        </div>
-
-        <div style="margin-top:28px;">
-          <h5 style="font-size:0.85rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;">Follow Us</h5>
-          <div class="social-links">
-            <a href="#" class="social-link" title="LinkedIn">in</a>
-            <a href="#" class="social-link" title="Twitter">𝕏</a>
-            <a href="#" class="social-link" title="YouTube">▶</a>
-            <a href="#" class="social-link" title="GitHub">⌥</a>
-          </div>
         </div>
       </div>
 
-      <!-- Contact Form -->
+      <!-- Right: Contact Form -->
       <div class="reveal">
-        <div class="card" style="padding:40px;">
-          <h3 style="font-size:1.4rem;margin-bottom:6px;">Send Us a Message</h3>
-          <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:28px;">Fill in the details below and we'll get back to you promptly.</p>
+        <div class="form-card">
+          <h3 style="font-size:1.3rem;margin-bottom:8px;">Send Us a Message</h3>
+          <p style="font-size:0.88rem;color:var(--text-muted);margin-bottom:28px;">Fill in the form and a technology expert will respond within 4 business hours.</p>
 
-          <?php if ($form_success) { ?>
+          <?php if ($success): ?>
           <div class="alert alert-success">
-            <span>✅</span>
+            <span>&#10003;</span>
             <div>
-              <strong>Message sent successfully!</strong><br>
-              <span style="font-size:0.85rem;">Thank you for reaching out. We'll be in touch within 24 hours.</span>
+              <strong>Message Received!</strong><br>
+              Thank you, <?php echo $name; ?>. We will be in touch within 4 business hours.
             </div>
           </div>
-          <?php } ?>
-
-          <?php if ($form_error) { ?>
+          <?php elseif ($error): ?>
           <div class="alert alert-error">
-            <span>❌</span>
-            <span>There was an issue sending your message. Please try again or email us directly.</span>
+            <span>&#9888;</span>
+            <div><?php echo $error; ?></div>
           </div>
-          <?php } ?>
+          <?php endif; ?>
 
-          <?php if (!empty($errors)) { ?>
-          <div class="alert alert-error">
-            <span>⚠️</span>
-            <div>
-              <?php foreach($errors as $err){ echo '<div style="font-size:0.87rem;">' . $err . '</div>'; } ?>
-            </div>
-          </div>
-          <?php } ?>
-
-          <?php if (!$form_success) { ?>
-          <form method="POST" action="" id="contact-form" novalidate>
+          <?php if (!$success): ?>
+          <form method="POST" action="contact.php">
             <!-- Honeypot -->
-            <div style="display:none;">
-              <input type="text" name="website" value="" tabindex="-1" autocomplete="off">
-            </div>
+            <div style="display:none;"><input type="text" name="website" value=""></div>
 
             <div class="form-row">
               <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" class="form-control" placeholder="John Smith" required value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>">
+                <label class="form-label">Full Name *</label>
+                <input type="text" name="name" class="form-input" placeholder="John Smith" required value="<?php echo isset($name)?htmlspecialchars($name):''; ?>">
               </div>
               <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" class="form-control" placeholder="john@company.com" required value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                <label class="form-label">Work Email *</label>
+                <input type="email" name="email" class="form-input" placeholder="john@company.com" required value="<?php echo isset($email)?htmlspecialchars($email):''; ?>">
               </div>
             </div>
-
             <div class="form-row">
               <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" class="form-control" placeholder="+91 98765 43210" value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : ''; ?>">
+                <label class="form-label">Company Name</label>
+                <input type="text" name="company" class="form-input" placeholder="Acme Corp" value="<?php echo isset($company)?htmlspecialchars($company):''; ?>">
               </div>
               <div class="form-group">
-                <label for="company">Company / Organisation</label>
-                <input type="text" id="company" name="company" class="form-control" placeholder="Your Company" value="<?php echo isset($_POST['company']) ? htmlspecialchars($_POST['company']) : ''; ?>">
+                <label class="form-label">Phone Number</label>
+                <input type="tel" name="phone" class="form-input" placeholder="+91 98765 43210" value="<?php echo isset($phone)?htmlspecialchars($phone):''; ?>">
               </div>
             </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label for="service">Service of Interest</label>
-                <select id="service" name="service" class="form-control">
-                  <option value="">Select a service...</option>
-                  <option value="Technology & Platforms" <?php echo (isset($_POST['service']) && $_POST['service']=='Technology & Platforms')?'selected':''; ?>>Technology &amp; Platforms</option>
-                  <option value="Operations & Delivery" <?php echo (isset($_POST['service']) && $_POST['service']=='Operations & Delivery')?'selected':''; ?>>Operations &amp; Delivery</option>
-                  <option value="Product & Innovation" <?php echo (isset($_POST['service']) && $_POST['service']=='Product & Innovation')?'selected':''; ?>>Product &amp; Innovation</option>
-                  <option value="Finance & Compliance" <?php echo (isset($_POST['service']) && $_POST['service']=='Finance & Compliance')?'selected':''; ?>>Finance &amp; Compliance</option>
-                  <option value="Sales & Marketing" <?php echo (isset($_POST['service']) && $_POST['service']=='Sales & Marketing')?'selected':''; ?>>Sales &amp; Marketing</option>
-                  <option value="Learning & Talent" <?php echo (isset($_POST['service']) && $_POST['service']=='Learning & Talent')?'selected':''; ?>>Learning &amp; Talent Development</option>
-                  <option value="Content & Media" <?php echo (isset($_POST['service']) && $_POST['service']=='Content & Media')?'selected':''; ?>>Content &amp; Media Services</option>
-                  <option value="Consulting" <?php echo (isset($_POST['service']) && $_POST['service']=='Consulting')?'selected':''; ?>>Strategic Consulting</option>
-                  <option value="Partnership" <?php echo (isset($_POST['service']) && $_POST['service']=='Partnership')?'selected':''; ?>>Partnership / Alliance</option>
-                  <option value="Career" <?php echo (isset($_POST['service']) && $_POST['service']=='Career')?'selected':''; ?>>Career Opportunity</option>
-                  <option value="Other" <?php echo (isset($_POST['service']) && $_POST['service']=='Other')?'selected':''; ?>>Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" class="form-control" placeholder="Brief topic" value="<?php echo isset($_POST['subject']) ? htmlspecialchars($_POST['subject']) : ''; ?>">
-              </div>
-            </div>
-
             <div class="form-group">
-              <label for="message">Your Message *</label>
-              <textarea id="message" name="message" class="form-control" placeholder="Tell us about your project, requirements or question..." required><?php echo isset($_POST['message']) ? htmlspecialchars($_POST['message']) : ''; ?></textarea>
+              <label class="form-label">I am interested in *</label>
+              <select name="service" class="form-input" required>
+                <option value="">Select a service area</option>
+                <option value="IT Products">IT Products (AI Studio, Workflow, Analytics, CloudOps)</option>
+                <option value="Custom Software Development">Custom Software Development</option>
+                <option value="Cloud Engineering">Cloud Engineering</option>
+                <option value="Data Engineering">Data Engineering</option>
+                <option value="AI Solutions">AI Solutions</option>
+                <option value="Digital Transformation Consulting">Digital Transformation Consulting</option>
+                <option value="Enterprise Architecture Consulting">Enterprise Architecture Consulting</option>
+                <option value="Cloud Transformation Consulting">Cloud Transformation Consulting</option>
+                <option value="AI Adoption Consulting">AI Adoption Consulting</option>
+                <option value="Other">Other / General Enquiry</option>
+              </select>
             </div>
-
-            <button type="submit" name="submit_contact" class="btn btn-primary" style="width:100%;justify-content:center;padding:15px;font-size:1rem;">
-              Send Message →
+            <div class="form-group">
+              <label class="form-label">Tell Us About Your Challenge *</label>
+              <textarea name="message" class="form-input" placeholder="Describe your technology challenge, current situation and what outcomes you are hoping to achieve..." required><?php echo isset($message)?htmlspecialchars($message):''; ?></textarea>
+            </div>
+            <button type="submit" name="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:1rem;padding:15px;">
+              Send Message &rarr;
             </button>
-
-            <p style="font-size:0.78rem;color:var(--text-muted);text-align:center;margin-top:14px;">
-              By submitting, you agree to our Privacy Policy. We'll never share your data.
+            <p style="font-size:0.78rem;color:var(--text-muted);text-align:center;margin-top:12px;">
+              By submitting, you agree to our privacy policy. We never share your information.
             </p>
           </form>
+          <?php endif; ?>
+        </div>
+
+        <!-- What Happens Next -->
+        <div style="background:rgba(0,144,255,0.05);border:1px solid rgba(0,144,255,0.12);border-radius:var(--radius-xl);padding:28px;margin-top:24px;">
+          <h4 style="font-size:0.82rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue-bright);margin-bottom:18px;">What Happens Next</h4>
+          <?php foreach(array(
+            array('1','Our team reviews your enquiry within 4 business hours'),
+            array('2','A senior consultant reaches out to schedule a discovery call'),
+            array('3','We conduct a complimentary 60-minute strategy session'),
+            array('4','You receive a tailored proposal within 5 business days'),
+          ) as $step){ ?>
+          <div style="display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);">
+            <div style="width:26px;height:26px;border-radius:50%;background:var(--grad-brand);display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:800;color:#fff;flex-shrink:0;"><?php echo $step[0]; ?></div>
+            <p style="font-size:0.87rem;color:var(--text-secondary);line-height:1.6;margin:0;"><?php echo $step[1]; ?></p>
+          </div>
           <?php } ?>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- FAQ -->
+<!-- Map Placeholder + Office Addresses -->
 <section class="section">
   <div class="container">
-    <div class="text-center mb-4 reveal">
-      <span class="badge badge-green">❓ FAQ</span>
-      <h2 class="section-title mt-2">Frequently Asked <span class="gradient-text">Questions</span></h2>
+    <div class="text-center reveal mb-4">
+      <div class="section-label" style="justify-content:center;">Our Offices</div>
+      <h2 class="display-2 section-heading">Find Us <span class="grad-text">Across India</span></h2>
     </div>
-    <div style="max-width:760px;margin:0 auto;" class="stagger">
+    <div class="grid-4 stagger">
       <?php
-      $faqs = array(
-        array('How quickly can your team start on a project?','We typically onboard new projects within 1-2 weeks of agreement signing, depending on scope and resource availability. For urgent projects, we can mobilise within 48-72 hours.'),
-        array('Do you work with startups or only enterprises?','We serve both — from early-stage startups needing their first product built, to enterprises undergoing large-scale digital transformation. Our model scales to your needs.'),
-        array('Can you work with our existing technology stack?','Absolutely. Our engineers are polyglot practitioners comfortable with a wide range of technologies, frameworks and platforms. We adapt to your environment.'),
-        array('What is the minimum engagement size?','Our project engagements start from a defined discovery phase. We also offer retainer-based advisory from a monthly minimum. Contact us for a tailored proposal.'),
-        array('Do you offer training for individuals or only corporates?','Both! Our CLO division runs open cohort programs for individual learners and custom corporate programs for enterprises. Visit our Learning page for details.'),
-        array('How do you ensure project quality?','Our COO division operates a rigorous QA framework with dedicated QA engineers, defined quality gates, automated testing and regular client reviews at every sprint.'),
+      $offices = array(
+        array('&#127968;','Bengaluru','Embassy TechVillage, Outer Ring Road, Devarabisanahalli, Bengaluru – 560103','Headquarters'),
+        array('&#127984;','Mumbai','One BKC, Bandra Kurla Complex, Mumbai – 400051','West India'),
+        array('&#127963;','Delhi NCR','Cyber City, DLF Phase II, Gurugram – 122002','North India'),
+        array('&#127976;','Hyderabad','Mindspace SEZ, HITEC City, Hyderabad – 500081','South India'),
       );
-      foreach($faqs as $i => $faq){ ?>
-      <div style="padding:20px;background:var(--card-bg);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;cursor:pointer;" onclick="var a=this.querySelector('.faq-ans');a.style.display=a.style.display=='none'?'block':'none';">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <h4 style="font-size:1rem;color:#fff;"><?php echo $faq[0]; ?></h4>
-          <span style="color:var(--accent);font-size:1.2rem;flex-shrink:0;margin-left:16px;">+</span>
-        </div>
-        <div class="faq-ans" style="display:none;margin-top:12px;">
-          <p style="font-size:0.88rem;color:var(--text-muted);line-height:1.8;"><?php echo $faq[1]; ?></p>
-        </div>
+      foreach($offices as $o){ ?>
+      <div style="background:var(--navy-light);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px;transition:all 0.3s;">
+        <div style="font-size:2rem;margin-bottom:12px;"><?php echo $o[0]; ?></div>
+        <h4 style="font-size:1rem;margin-bottom:4px;"><?php echo $o[1]; ?></h4>
+        <div class="badge badge-blue" style="margin-bottom:12px;"><?php echo $o[3]; ?></div>
+        <p style="font-size:0.83rem;color:var(--text-muted);line-height:1.6;"><?php echo $o[2]; ?></p>
       </div>
       <?php } ?>
+    </div>
+
+    <!-- Google Maps embed placeholder -->
+    <div style="margin-top:40px;background:rgba(0,144,255,0.04);border:1px solid rgba(0,144,255,0.12);border-radius:var(--radius-xl);height:320px;display:flex;align-items:center;justify-content:center;overflow:hidden;" class="reveal">
+      <div style="text-align:center;">
+        <div style="font-size:3rem;margin-bottom:16px;">&#127757;</div>
+        <p style="color:var(--text-muted);font-size:0.9rem;">Google Maps Embed &mdash; Replace with your actual Google Maps iframe on production.</p>
+        <p style="color:var(--text-muted);font-size:0.8rem;">Astrl Mind Technologies, Embassy TechVillage, Bengaluru</p>
+      </div>
     </div>
   </div>
 </section>

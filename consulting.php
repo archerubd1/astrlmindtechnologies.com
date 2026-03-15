@@ -1,122 +1,122 @@
 <?php
-define('BASE_PATH', __DIR__);
 define('BASE_URL', '');
-$current_page = 'consulting';
-$page_title   = 'Consulting – Astrl Mind Technologies';
-$page_desc    = 'Strategic consulting services: digital transformation, AI strategy, technology architecture, talent strategy and go-to-market consulting.';
+$active     = 'consulting';
+$page_title = 'Technology Consulting – Astrl Mind Technologies Pvt Ltd';
+$page_desc  = 'Strategic technology consulting: Digital Transformation, Enterprise Architecture, Cloud Transformation, AI Adoption and Technology Modernisation by Astrl Mind.';
 include 'includes/header.php';
 ?>
 
 <section class="page-hero">
-  <div class="container" style="position:relative;z-index:1;">
-    <div class="breadcrumb"><a href="index.php">Home</a><span>/</span><span>Consulting</span></div>
-    <span class="badge badge-gold">💼 Expert Consulting</span>
-    <h1 class="mt-2">Strategic <span class="gradient-text">Consulting</span></h1>
-    <p class="lead mt-2">Navigate complexity, accelerate transformation and unlock breakthrough growth with Astrl Mind's cross-domain consulting expertise.</p>
+  <div class="container">
+    <div class="breadcrumb"><a href="index.php">Home</a><span class="sep">/</span><span>Consulting</span></div>
+    <div class="badge badge-violet" style="margin-bottom:20px;">&#128188; Strategic Consulting</div>
+    <h1 class="display-2">Transform Strategy<br><span class="grad-text">Into Reality</span></h1>
+    <p class="lead mt-3" style="max-width:620px;margin:0 auto;">Expert technology advisory from seasoned practitioners — not theorists. We translate complex digital challenges into executable transformation roadmaps backed by engineering expertise.</p>
   </div>
 </section>
 
-<!-- WHY CONSULTING -->
-<section class="section">
+<!-- Intro -->
+<section class="section section-dark">
   <div class="container">
-    <div class="two-col">
+    <div class="col-split">
       <div class="reveal">
-        <span class="badge badge-gold">🎯 Our Philosophy</span>
-        <h2 class="section-title mt-2">Consulting That <span class="gradient-text">Transforms</span></h2>
-        <p style="color:var(--text-muted);margin-top:16px;line-height:1.9;">Unlike traditional consulting firms, Astrl Mind brings a unique advantage: we are both a consulting practice and a delivery engine. We don't just recommend — we implement, manage and iterate alongside you until the desired outcome is achieved.</p>
-        <p style="color:var(--text-muted);margin-top:14px;line-height:1.9;">Our consultants are practitioners first — engineers, product managers, financial experts, marketing leaders and learning architects who bring hands-on expertise to every engagement.</p>
-
-        <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
-          <?php
-          $why = array(
-            array('🤝','Practitioner Consultants','Real experience, not just frameworks'),
-            array('🔁','Consult-to-Implement','Strategy + execution, seamlessly'),
-            array('📊','Data-Driven Insights','Evidence-based recommendations'),
-            array('⚡','Agile Consulting','Fast cycles, continuous refinement'),
-          );
-          foreach($why as $w){ ?>
-          <div style="padding:16px;background:rgba(13,34,71,0.5);border:1px solid var(--border);border-radius:10px;">
-            <div style="font-size:1.5rem;margin-bottom:8px;"><?php echo $w[0]; ?></div>
-            <div style="font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:4px;"><?php echo $w[1]; ?></div>
-            <div style="font-size:0.8rem;color:var(--text-muted);"><?php echo $w[2]; ?></div>
+        <div class="section-label">Our Approach</div>
+        <h2 class="display-2 section-heading">Consulting That <span class="grad-text">Delivers</span></h2>
+        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:24px;">Our consulting practice is different. Every Astrl Mind consultant is a practitioner who has built and operated enterprise technology at scale. We do not deliver reports and walk away — we build executable roadmaps and often stay to implement them.</p>
+        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:32px;">Our consultants combine strategic thinking with deep engineering expertise to ensure every recommendation is technically sound, commercially viable and operationally achievable.</p>
+        <div class="grid-2" style="gap:16px;">
+          <?php foreach(array(array('300+','Consulting Engagements'),array('92%','Client Satisfaction'),array('18','Avg Consultant Experience'),array('40+','Certified Architects')) as $m){ ?>
+          <div style="padding:20px;background:rgba(108,71,255,0.06);border:1px solid rgba(108,71,255,0.2);border-radius:var(--radius-md);text-align:center;">
+            <div style="font-size:1.8rem;font-weight:900;font-family:var(--font-head);background:var(--grad-brand);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"><?php echo $m[0]; ?></div>
+            <div style="font-size:0.78rem;color:var(--text-muted);"><?php echo $m[1]; ?></div>
           </div>
           <?php } ?>
         </div>
       </div>
       <div class="reveal">
-        <div class="card">
-          <h4 style="margin-bottom:20px;font-size:1.1rem;color:var(--gold);">⚡ Our Consulting Process</h4>
-          <?php
-          $process = array(
-            array('1','Discover','Deep-dive into your business, challenges, goals and current state.'),
-            array('2','Diagnose','Root cause analysis, gap identification and opportunity mapping.'),
-            array('3','Design','Co-create a tailored strategy, roadmap and implementation plan.'),
-            array('4','Deliver','Execute with our internal teams or guide your team to implement.'),
-            array('5','Drive','Continuous measurement, iteration and optimisation for sustained results.'),
-          );
-          foreach($process as $p){ ?>
-          <div style="display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid var(--border);">
-            <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:800;font-size:0.9rem;color:#fff;flex-shrink:0;"><?php echo $p[0]; ?></div>
-            <div>
-              <div style="font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:3px;"><?php echo $p[1]; ?></div>
-              <div style="font-size:0.83rem;color:var(--text-muted);"><?php echo $p[2]; ?></div>
-            </div>
+        <h3 style="font-size:1.1rem;margin-bottom:24px;">How We Engage</h3>
+        <?php foreach(array(
+          array('1','Discovery Workshop','2-day deep dive into your business context, technology landscape and strategic objectives to define the transformation challenge.'),
+          array('2','Current State Assessment','Comprehensive assessment of your technology architecture, processes, capabilities and competitive positioning.'),
+          array('3','Future State Design','Co-creation of your target architecture, operating model and technology roadmap aligned to business outcomes.'),
+          array('4','Roadmap &amp; Business Case','Detailed transformation roadmap with prioritised initiatives, investment cases and benefit projections.'),
+          array('5','Execution Support','Optional hands-on programme management, architecture governance and delivery assurance throughout implementation.'),
+        ) as $s){ ?>
+        <div class="process-step">
+          <div class="step-num"><?php echo $s[0]; ?></div>
+          <div class="step-content">
+            <h4><?php echo $s[1]; ?></h4>
+            <p><?php echo $s[2]; ?></p>
           </div>
-          <?php } ?>
         </div>
+        <?php } ?>
       </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- CONSULTING PRACTICES -->
+<!-- Consulting Practices -->
 <section class="section">
   <div class="container">
-    <div class="text-center mb-4 reveal">
-      <span class="badge badge-gold">🧩 Consulting Practices</span>
-      <h2 class="section-title mt-2">Areas of <span class="gradient-text">Deep Expertise</span></h2>
+    <div class="text-center reveal">
+      <div class="section-label" style="justify-content:center;">Practice Areas</div>
+      <h2 class="display-2 section-heading">Five Consulting <span class="grad-text">Practices</span></h2>
+      <p class="section-sub center">Specialised expertise across the dimensions of enterprise digital transformation.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;" class="stagger">
+    <div class="grid-2 stagger" style="gap:28px;">
       <?php
       $practices = array(
-        array('🔄','Digital Transformation',
-          'End-to-end strategy and execution for modernising technology, processes and culture.',
-          array('Legacy system modernisation','Cloud migration strategy','Process automation roadmap','Change management &amp; adoption','Digital maturity assessment')),
-        array('🤖','AI &amp; Data Strategy',
-          'Helping enterprises become AI-native — from data infrastructure to production ML deployment.',
-          array('AI readiness assessment','Data architecture design','ML use case identification','Generative AI integration','AI governance frameworks')),
-        array('📐','Technology Architecture',
-          'Designing scalable, future-proof technology foundations that support long-term growth.',
-          array('Enterprise architecture review','Microservices migration','API strategy &amp; governance','Technology selection advisory','Technical debt reduction')),
-        array('👥','Talent &amp; HR Strategy',
-          'Building high-performance teams and talent pipelines aligned to your strategic direction.',
-          array('Workforce planning &amp; skill mapping','Train-to-hire program design','L&amp;D strategy consulting','Talent acquisition advisory','Organisation design')),
-        array('📣','Go-to-Market Strategy',
-          'Crafting and executing compelling GTM plans for product launches and market expansion.',
-          array('Market entry strategy','Competitive positioning','Pricing &amp; revenue model','Sales &amp; channel strategy','Launch execution support')),
-        array('⚖️','Risk &amp; Governance',
-          'Building resilient, compliant and accountable organisations that stand the test of scrutiny.',
-          array('Enterprise risk framework','Compliance readiness assessment','Data privacy &amp; GDPR advisory','Board governance consulting','Business continuity planning')),
-        array('📊','Financial Strategy',
-          'Optimising financial performance, capital allocation and fiscal governance for sustainable growth.',
-          array('Financial model design','Fundraising strategy advisory','Cost optimisation programs','M&amp;A financial due diligence','FP&amp;A transformation')),
-        array('🎨','Brand &amp; Content Strategy',
-          'Building powerful brand identities and content ecosystems that define market leadership.',
-          array('Brand audit &amp; repositioning','Content strategy &amp; architecture','Thought leadership programs','Digital brand presence','Audience growth strategy')),
+        array(
+          'icon' => '&#128302;',
+          'title' => 'Digital Transformation Strategy',
+          'color' => '#0090ff',
+          'desc' => 'Define and execute your enterprise-wide digital transformation agenda. We assess your digital maturity, identify transformation opportunities and build a multi-year roadmap that delivers measurable business outcomes.',
+          'deliverables' => array('Digital Maturity Assessment','Transformation Roadmap (12-36 months)','Business Case and ROI Framework','Operating Model Design','Change Management Strategy','Digital KPI Framework'),
+        ),
+        array(
+          'icon' => '&#127959;',
+          'title' => 'Enterprise Architecture Consulting',
+          'color' => '#6c47ff',
+          'desc' => 'Design the technology architecture that will power your organisation for the next decade. Our enterprise architects bring TOGAF, SAFe and cloud-native design patterns to create architectures that are scalable, interoperable and future-proof.',
+          'deliverables' => array('Current &amp; Target Architecture','Architecture Principles &amp; Standards','Technology Selection Framework','Integration Architecture','Data Architecture Blueprint','Security Architecture Design'),
+        ),
+        array(
+          'icon' => '&#9729;',
+          'title' => 'Cloud Transformation Consulting',
+          'color' => '#00d4a4',
+          'desc' => 'Navigate the complexities of cloud adoption with confidence. From cloud strategy and platform selection to migration planning and operating model transformation — we ensure your cloud journey delivers the promised benefits.',
+          'deliverables' => array('Cloud Strategy &amp; Vendor Selection','Application Portfolio Assessment','Cloud Business Case &amp; TCO Analysis','Migration Wave Planning','Cloud Operating Model','FinOps Governance Framework'),
+        ),
+        array(
+          'icon' => '&#129302;',
+          'title' => 'AI Adoption Consulting',
+          'color' => '#f59e0b',
+          'desc' => 'Move from AI curiosity to AI-driven competitive advantage. Our AI strategists help you identify high-value AI use cases, build the data and technology foundation and create an organisation-wide AI adoption strategy.',
+          'deliverables' => array('AI Readiness Assessment','Use Case Prioritisation (5-10 use cases)','AI Data Strategy','AI Platform Selection','AI Ethics &amp; Governance Framework','AI Centre of Excellence Design'),
+        ),
+        array(
+          'icon' => '&#128257;',
+          'title' => 'Technology Modernisation',
+          'color' => '#ff4d6d',
+          'desc' => 'Systematically modernise your legacy technology portfolio — reducing technical debt, improving agility and enabling innovation. We create phased modernisation programmes that minimise risk and maximise business continuity.',
+          'deliverables' => array('Legacy Portfolio Assessment','Technical Debt Quantification','Modernisation Roadmap','Application Rationalisation Plan','API Strategy &amp; Design','DevOps Transformation Plan'),
+        ),
+        array(
+          'icon' => '&#128737;',
+          'title' => 'Cybersecurity &amp; Risk Consulting',
+          'color' => '#22c55e',
+          'desc' => 'Build enterprise-grade security and risk management capabilities. Our security architects assess your current posture, design defence-in-depth architectures and help you achieve and maintain regulatory compliance.',
+          'deliverables' => array('Security Posture Assessment','Zero-Trust Architecture Design','Compliance Gap Analysis','Security Operating Model','Incident Response Framework','Security Awareness Programme'),
+        ),
       );
       foreach($practices as $p){ ?>
-      <div class="card">
-        <div style="font-size:2rem;margin-bottom:14px;"><?php echo $p[0]; ?></div>
-        <h3 style="font-size:1.05rem;margin-bottom:8px;"><?php echo $p[1]; ?></h3>
-        <p style="font-size:0.87rem;color:var(--text-muted);margin-bottom:16px;"><?php echo $p[2]; ?></p>
-        <ul style="list-style:none;padding:0;">
-          <?php foreach($p[3] as $item){ ?>
-          <li style="display:flex;align-items:center;gap:8px;padding:5px 0;font-size:0.82rem;color:var(--text-muted);">
-            <span style="color:var(--gold);font-size:0.7rem;">✦</span><?php echo $item; ?>
-          </li>
-          <?php } ?>
+      <div class="consult-card" style="--c:<?php echo $p['color']; ?>;">
+        <div class="consult-icon"><?php echo $p['icon']; ?></div>
+        <h3><?php echo $p['title']; ?></h3>
+        <p><?php echo $p['desc']; ?></p>
+        <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--blue-bright);margin-bottom:12px;">Key Deliverables</div>
+        <ul class="consult-deliverables">
+          <?php foreach($p['deliverables'] as $d){ ?><li><?php echo $d; ?></li><?php } ?>
         </ul>
       </div>
       <?php } ?>
@@ -124,49 +124,64 @@ include 'includes/header.php';
   </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- ENGAGEMENT MODELS -->
-<section class="section" style="background:linear-gradient(135deg,rgba(245,158,11,0.03),rgba(0,200,255,0.03));">
+<!-- Why Astrl Mind Consulting -->
+<section class="section section-dark">
   <div class="container">
-    <div class="text-center mb-4 reveal">
-      <span class="badge badge-accent">📋 Engagement Models</span>
-      <h2 class="section-title mt-2">How We <span class="gradient-text">Work Together</span></h2>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;" class="stagger">
-      <?php
-      $models = array(
-        array('⚡','Project-Based','Focused engagement with defined scope, timeline and outcomes. Ideal for specific initiatives.','Fixed scope','Clear deliverables','Time-bound'),
-        array('🔄','Retainer Advisory','Ongoing strategic advisor relationship. Monthly retainer for continuous guidance and support.','Monthly engagement','Flexible scope','Strategic advisory'),
-        array('🤝','Embedded Consulting','Our consultants work within your team — driving transformation from the inside.','Team integration','Hands-on execution','Knowledge transfer'),
-        array('🎯','Workshop &amp; Sprint','Intensive structured workshops to solve specific problems in focused 1-5 day engagements.','Fast-paced','Collaborative','Immediate output'),
-      );
-      foreach($models as $m){ ?>
-      <div class="card text-center">
-        <div style="font-size:2.5rem;margin-bottom:14px;"><?php echo $m[0]; ?></div>
-        <h3 style="font-size:1.1rem;margin-bottom:8px;"><?php echo $m[1]; ?></h3>
-        <p style="font-size:0.87rem;color:var(--text-muted);margin-bottom:16px;"><?php echo $m[2]; ?></p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;">
-          <span class="badge badge-accent" style="font-size:0.72rem;"><?php echo $m[3]; ?></span>
-          <span class="badge badge-purple" style="font-size:0.72rem;"><?php echo $m[4]; ?></span>
-          <span class="badge badge-green" style="font-size:0.72rem;"><?php echo $m[5]; ?></span>
+    <div class="col-split">
+      <div class="reveal">
+        <div class="section-label">Our Difference</div>
+        <h2 class="display-2 section-heading">Practitioners, Not <span class="grad-text">Theorists</span></h2>
+        <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:28px;">Most consulting firms send junior analysts with slide decks. We send battle-tested technology leaders with real implementation experience. The difference is recommendations that actually work in practice.</p>
+        <?php foreach(array(
+          array('Engineering + Strategy','Our consultants think in systems, architectures and delivery — not just frameworks.'),
+          array('Industry Domain Depth','Consulting teams are aligned to industries with sector-specific knowledge and regulatory expertise.'),
+          array('Vendor Independence','We are technology-agnostic. We recommend the best solution for your context, not the one we are paid to sell.'),
+          array('Outcome Accountability','We define measurable success criteria upfront and are accountable to delivering them.'),
+          array('Seamless Implementation','Our consulting and engineering teams work together — ensuring smooth handoff from strategy to execution.'),
+        ) as $d){ ?>
+        <div style="display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--border);">
+          <span style="color:var(--teal);flex-shrink:0;font-size:1.1rem;margin-top:2px;">&#10003;</span>
+          <div>
+            <div style="font-size:0.93rem;font-weight:700;color:#fff;margin-bottom:3px;"><?php echo $d[0]; ?></div>
+            <div style="font-size:0.83rem;color:var(--text-muted);"><?php echo $d[1]; ?></div>
+          </div>
         </div>
+        <?php } ?>
       </div>
-      <?php } ?>
+      <div class="reveal">
+        <!-- Engagement Models -->
+        <h3 style="font-size:1.1rem;margin-bottom:24px;">Engagement Models</h3>
+        <?php foreach(array(
+          array('&#128203;','Fixed-Scope Engagement','Defined deliverables, timeline and investment for specific consulting projects — ideal for strategy, assessments and roadmaps.'),
+          array('&#128197;','Retainer Advisory','Ongoing strategic advisory on a monthly or quarterly basis — ideal for CxO-level technology guidance and programme oversight.'),
+          array('&#128101;','Embedded Consulting','Astrl Mind architects and strategists embedded within your organisation — ideal for large transformation programmes requiring sustained expertise.'),
+        ) as $em){ ?>
+        <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="font-size:1.6rem;flex-shrink:0;"><?php echo $em[0]; ?></div>
+            <div>
+              <h4 style="font-size:0.97rem;margin-bottom:6px;"><?php echo $em[1]; ?></h4>
+              <p style="font-size:0.85rem;color:var(--text-muted);line-height:1.65;"><?php echo $em[2]; ?></p>
+            </div>
+          </div>
+        </div>
+        <?php } ?>
+        <a href="contact.php" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:8px;">Discuss Your Needs &rarr;</a>
+      </div>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
+<!-- CTA -->
 <section class="section">
   <div class="container reveal">
-    <div class="cta-banner">
-      <h2>Ready for a <span class="gradient-text">Free Discovery Call</span>?</h2>
-      <p>Let's explore your challenges and opportunities together. No commitment — just a candid conversation about how we can help.</p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a href="contact.php" class="btn btn-primary">Book a Discovery Call →</a>
-        <a href="services.php" class="btn btn-outline">Browse All Services</a>
+    <div class="cta-band">
+      <div class="badge badge-violet" style="margin-bottom:20px;">&#128188; Free Consultation</div>
+      <h2>Start Your <span class="grad-text">Transformation Conversation</span></h2>
+      <p>Get a complimentary 60-minute strategy session with one of our senior consultants. No obligation — just expert perspective on your technology challenges.</p>
+      <div class="gap-row" style="justify-content:center;">
+        <a href="contact.php" class="btn btn-primary btn-lg">Book Free Session &rarr;</a>
+        <a href="case-studies.php" class="btn btn-secondary btn-lg">View Case Studies</a>
       </div>
     </div>
   </div>
