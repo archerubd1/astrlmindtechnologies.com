@@ -1,123 +1,95 @@
 <?php
-/* ============================================================
-   ASTRL MIND TECHNOLOGIES — Footer Include
-   ============================================================ */
+/* ================================================================
+   ASTRL MIND TECHNOLOGIES PVT LTD — Footer Include  PHP 5.x
+   ================================================================ */
 ?>
-<!-- ====== FOOTER ====== -->
+<div class="divider"></div>
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
 
-      <!-- Brand -->
+      <!-- Brand col -->
       <div class="footer-brand">
-        <a href="<?php echo BASE_URL; ?>index.php" class="nav-logo" style="display:inline-flex;margin-bottom:4px;">
-          <div class="nav-logo-icon">AM</div>
-          <div class="nav-logo-text">
-            <span class="nav-logo-name">Astrl Mind</span>
-            <span class="nav-logo-tagline">Technologies</span>
+        <a href="<?php echo BASE_URL; ?>index.php" class="nav-brand" style="text-decoration:none;">
+          <div class="nav-logo-mark">AM</div>
+          <div class="nav-brand-name">
+            <span class="name">Astrl Mind Technologies</span>
+            <span class="pvt">Private Limited</span>
           </div>
         </a>
-        <p>Architecting the future through intelligent technology, human potential and purposeful innovation.</p>
-        <div class="social-links" style="margin-top:22px;">
-          <a href="#" class="social-link" title="LinkedIn">in</a>
-          <a href="#" class="social-link" title="Twitter">𝕏</a>
-          <a href="#" class="social-link" title="YouTube">▶</a>
-          <a href="#" class="social-link" title="GitHub">⌥</a>
+        <p>Engineering intelligent digital platforms for the future. AI, Cloud, Enterprise Software and Digital Transformation delivered by experts.</p>
+        <div class="social-row" style="margin-top:20px;">
+          <a href="#" class="social-btn" title="LinkedIn">in</a>
+          <a href="#" class="social-btn" title="Twitter">X</a>
+          <a href="#" class="social-btn" title="GitHub">GH</a>
+          <a href="#" class="social-btn" title="YouTube">YT</a>
         </div>
       </div>
 
-      <!-- Services -->
+      <!-- Products col -->
       <div class="footer-col">
-        <h5>Services</h5>
+        <h5>Products</h5>
         <ul class="footer-links">
-          <li><a href="<?php echo BASE_URL; ?>pages/services/technology.php">Technology &amp; Platforms</a></li>
-          <li><a href="<?php echo BASE_URL; ?>pages/services/operations.php">Operations &amp; Delivery</a></li>
-          <li><a href="<?php echo BASE_URL; ?>pages/services/product.php">Product &amp; Innovation</a></li>
-          <li><a href="<?php echo BASE_URL; ?>pages/services/finance.php">Finance &amp; Compliance</a></li>
-          <li><a href="<?php echo BASE_URL; ?>pages/services/sales.php">Sales &amp; Marketing</a></li>
-          <li><a href="<?php echo BASE_URL; ?>pages/services/learning.php">Learning &amp; Talent</a></li>
-          <li><a href="<?php echo BASE_URL; ?>pages/services/content.php">Content &amp; Media</a></li>
+          <li><a href="<?php echo BASE_URL; ?>pages/products/ai-studio.php">Astrl AI Studio</a></li>
+          <li><a href="<?php echo BASE_URL; ?>pages/products/workflow.php">Astrl Workflow</a></li>
+          <li><a href="<?php echo BASE_URL; ?>pages/products/analytics.php">Astrl Analytics</a></li>
+          <li><a href="<?php echo BASE_URL; ?>pages/products/cloudops.php">Astrl CloudOps</a></li>
+          <li><a href="<?php echo BASE_URL; ?>products.php">All Products</a></li>
         </ul>
       </div>
 
-      <!-- Company -->
+      <!-- Services col -->
+      <div class="footer-col">
+        <h5>Services &amp; Consulting</h5>
+        <ul class="footer-links">
+          <li><a href="<?php echo BASE_URL; ?>services.php#custom-dev">Custom Software Dev</a></li>
+          <li><a href="<?php echo BASE_URL; ?>services.php#cloud">Cloud Engineering</a></li>
+          <li><a href="<?php echo BASE_URL; ?>services.php#data">Data Engineering</a></li>
+          <li><a href="<?php echo BASE_URL; ?>services.php#ai">AI Solutions</a></li>
+          <li><a href="<?php echo BASE_URL; ?>consulting.php">Consulting</a></li>
+          <li><a href="<?php echo BASE_URL; ?>industries.php">Industries</a></li>
+        </ul>
+      </div>
+
+      <!-- Company col -->
       <div class="footer-col">
         <h5>Company</h5>
         <ul class="footer-links">
           <li><a href="<?php echo BASE_URL; ?>about.php">About Us</a></li>
-          <li><a href="<?php echo BASE_URL; ?>leadership.php">Leadership Team</a></li>
-          <li><a href="<?php echo BASE_URL; ?>consulting.php">Consulting</a></li>
+          <li><a href="<?php echo BASE_URL; ?>case-studies.php">Case Studies</a></li>
+          <li><a href="<?php echo BASE_URL; ?>insights.php">Insights &amp; Blog</a></li>
           <li><a href="<?php echo BASE_URL; ?>careers.php">Careers</a></li>
-          <li><a href="<?php echo BASE_URL; ?>contact.php">Contact</a></li>
+          <li><a href="<?php echo BASE_URL; ?>contact.php">Contact Us</a></li>
+          <li><a href="<?php echo BASE_URL; ?>contact.php">Privacy Policy</a></li>
         </ul>
-      </div>
-
-      <!-- Expertise -->
-      <div class="footer-col">
-        <h5>Expertise</h5>
-        <ul class="footer-links">
-          <li><a href="#">AI &amp; Machine Learning</a></li>
-          <li><a href="#">Cloud Architecture</a></li>
-          <li><a href="#">DevOps &amp; CI/CD</a></li>
-          <li><a href="#">UI/UX Design</a></li>
-          <li><a href="#">Data Analytics</a></li>
-          <li><a href="#">Cybersecurity</a></li>
-          <li><a href="#">Train-to-Hire</a></li>
-        </ul>
-      </div>
-
-      <!-- Connect -->
-      <div class="footer-col">
-        <h5>Connect</h5>
-        <ul class="footer-links">
-          <li><a href="mailto:hello@astrlmind.com">hello@astrlmind.com</a></li>
-          <li><a href="mailto:careers@astrlmind.com">careers@astrlmind.com</a></li>
-          <li><a href="tel:+910000000000">+91 00000 00000</a></li>
-        </ul>
-        <div style="margin-top:20px;">
-          <span class="badge badge-accent">🟢 Open for Projects</span>
-        </div>
-        <div style="margin-top:12px;">
-          <a href="<?php echo BASE_URL; ?>contact.php" class="btn btn-outline" style="padding:8px 18px;font-size:0.82rem;">Schedule a Call →</a>
-        </div>
       </div>
 
     </div>
 
+    <!-- Contact strip -->
+    <div style="display:flex;flex-wrap:wrap;gap:24px;padding:28px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:28px;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="color:var(--blue-bright);font-size:1rem;">&#128233;</span>
+        <span style="font-size:0.85rem;color:var(--text-secondary);">hello@astrlmind.com</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="color:var(--blue-bright);font-size:1rem;">&#128222;</span>
+        <span style="font-size:0.85rem;color:var(--text-secondary);">+91 98765 43210</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span style="color:var(--blue-bright);font-size:1rem;">&#128205;</span>
+        <span style="font-size:0.85rem;color:var(--text-secondary);">Bengaluru | Mumbai | Delhi | Hyderabad</span>
+      </div>
+    </div>
+
     <div class="footer-bottom">
-      <div>
-        &copy; <?php echo date('Y'); ?> <strong>Astrl Mind Technologies</strong>. All rights reserved.
-      </div>
-      <div style="display:flex;gap:20px;flex-wrap:wrap;">
-        <a href="#" style="color:var(--text-muted);">Privacy Policy</a>
-        <a href="#" style="color:var(--text-muted);">Terms of Service</a>
-        <a href="#" style="color:var(--text-muted);">Cookie Policy</a>
-      </div>
+      <span>&copy; <?php echo date('Y'); ?> Astrl Mind Technologies Pvt Ltd. All rights reserved.</span>
+      <span>Registered in India &mdash; CIN: U72900KA2020PTC123456</span>
     </div>
   </div>
 </footer>
 
-<!-- Back to top -->
-<button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"
-  style="position:fixed;bottom:28px;right:28px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;cursor:pointer;display:none;align-items:center;justify-content:center;font-size:1.2rem;color:#fff;box-shadow:0 4px 20px rgba(0,200,255,0.4);z-index:9000;transition:all 0.3s;">↑</button>
-
+<button id="btt" aria-label="Back to top">&#8679;</button>
 <script src="<?php echo BASE_URL; ?>assets/js/main.js"></script>
-<script>
-  // Back to top visibility
-  window.addEventListener('scroll', function() {
-    var btn = document.getElementById('back-to-top');
-    if (btn) btn.style.display = window.scrollY > 400 ? 'flex' : 'none';
-  });
-  // Hamburger / mobile menu wiring
-  var hbg = document.getElementById('hamburger');
-  var mob = document.getElementById('mobile-menu');
-  if(hbg && mob){
-    hbg.addEventListener('click', function(){
-      hbg.classList.toggle('active');
-      mob.classList.toggle('open');
-      document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
-    });
-  }
-</script>
 </body>
 </html>

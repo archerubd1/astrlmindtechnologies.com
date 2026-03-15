@@ -1,36 +1,32 @@
 <?php
-define('BASE_PATH', __DIR__);
 define('BASE_URL', '');
-$current_page = '404';
-$page_title   = '404 – Page Not Found | Astrl Mind Technologies';
-$page_desc    = 'The page you are looking for could not be found.';
+$active     = '';
+$page_title = '404 – Page Not Found | Astrl Mind Technologies Pvt Ltd';
+$page_desc  = 'Page not found. Return to Astrl Mind Technologies homepage.';
 include 'includes/header.php';
 ?>
 
 <section class="hero" style="min-height:80vh;">
   <div class="hero-bg"></div>
-  <div class="hero-grid"></div>
-  <div class="container" style="position:relative;z-index:1;text-align:center;">
-    <div style="font-size:8rem;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">404</div>
-    <h1 style="font-size:2rem;margin-bottom:16px;">Page Not Found</h1>
-    <p style="color:var(--text-muted);max-width:460px;margin:0 auto 36px;line-height:1.8;">The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-      <a href="index.php"    class="btn btn-primary">← Back to Home</a>
-      <a href="services.php" class="btn btn-outline">View Services</a>
-      <a href="contact.php"  class="btn btn-ghost">Contact Us</a>
-    </div>
-    <div style="margin-top:60px;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
-      <?php
-      $quick = array(
-        array('⚙️','Technology','pages/services/technology.php'),
-        array('🚀','Product','pages/services/product.php'),
-        array('🎓','Learning','pages/services/learning.php'),
-        array('💼','Consulting','consulting.php'),
-        array('👥','Leadership','leadership.php'),
-      );
-      foreach($quick as $q){ ?>
-      <a href="<?php echo $q[2]; ?>" style="padding:12px 20px;background:var(--card-bg);border:1px solid var(--border);border-radius:10px;color:var(--text-muted);font-size:0.87rem;transition:all 0.3s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='#fff';" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)';"><?php echo $q[0]; ?> <?php echo $q[1]; ?></a>
-      <?php } ?>
+  <div class="hero-grid-lines"></div>
+  <div class="container" style="text-align:center;">
+    <div class="hero-content" style="max-width:100%;text-align:center;">
+      <div style="font-size:8rem;font-weight:900;font-family:var(--font-head);background:var(--grad-hero);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:16px;">404</div>
+      <div class="badge badge-blue" style="margin-bottom:20px;justify-content:center;">&#128683; Page Not Found</div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:16px;">Looks Like You&rsquo;ve <span class="grad-text">Wandered Off the Map</span></h1>
+      <p class="lead" style="max-width:480px;margin:0 auto 40px;">The page you are looking for does not exist or may have been moved. Let us get you back on track.</p>
+      <div class="gap-row" style="justify-content:center;">
+        <a href="index.php" class="btn btn-primary btn-lg">&#127968; Back to Home</a>
+        <a href="contact.php" class="btn btn-secondary btn-lg">Contact Us</a>
+      </div>
+      <div style="margin-top:48px;">
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-bottom:16px;">Or explore these popular pages:</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
+          <?php foreach(array(array('products.php','Products'),array('services.php','Services'),array('consulting.php','Consulting'),array('industries.php','Industries'),array('case-studies.php','Case Studies'),array('careers.php','Careers')) as $l){ ?>
+          <a href="<?php echo $l[0]; ?>" class="btn btn-ghost btn-sm"><?php echo $l[1]; ?></a>
+          <?php } ?>
+        </div>
+      </div>
     </div>
   </div>
 </section>

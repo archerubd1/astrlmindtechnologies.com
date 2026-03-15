@@ -1,275 +1,148 @@
-/* ============================================================
-   ASTRL MIND TECHNOLOGIES — Main JavaScript
-   ES5 compatible for broad browser support
-   ============================================================ */
-
+/* ================================================================
+   ASTRL MIND TECHNOLOGIES — Main JS  (ES5 compatible)
+   ================================================================ */
 (function() {
   'use strict';
 
-  /* ---- Navbar scroll effect ---- */
-  var navbar = document.querySelector('.navbar');
-  if (navbar) {
-    window.addEventListener('scroll', function() {
-      if (window.scrollY > 30) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
+  /* ── Navbar scroll ───────────────────────────────────────────── */
+  var nav = document.getElementById('main-nav');
+  function onScroll() {
+    if (!nav) return;
+    if (window.pageYOffset > 40) { nav.classList.add('scrolled'); }
+    else { nav.classList.remove('scrolled'); }
+    var btt = document.getElementById('btt');
+    if (btt) btt.style.display = window.pageYOffset > 400 ? 'flex' : 'none';
   }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
-  /* ---- Mobile hamburger menu ---- */
-  var hamburger = document.querySelector('.hamburger');
-  var mobileMenu = document.querySelector('.mobile-menu');
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', function() {
-      hamburger.classList.toggle('active');
-      mobileMenu.classList.toggle('open');
-      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  /* ── Mobile hamburger ────────────────────────────────────────── */
+  var hbg = document.getElementById('hamburger');
+  var mob = document.getElementById('mobile-nav');
+  if (hbg && mob) {
+    hbg.addEventListener('click', function() {
+      hbg.classList.toggle('active');
+      mob.classList.toggle('open');
+      document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
     });
-    // Close on link click
-    var mobileLinks = mobileMenu.querySelectorAll('a');
-    for (var i = 0; i < mobileLinks.length; i++) {
-      mobileLinks[i].addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        mobileMenu.classList.remove('open');
+    var mobLinks = mob.querySelectorAll('a');
+    for (var i = 0; i < mobLinks.length; i++) {
+      mobLinks[i].addEventListener('click', function() {
+        hbg.classList.remove('active');
+        mob.classList.remove('open');
         document.body.style.overflow = '';
       });
     }
   }
 
-  /* ---- Active nav link ---- */
-  var currentPath = window.location.pathname.split('/').pop() || 'index.php';
-  var navLinks = document.querySelectorAll('.nav-links a, .mobile-menu a');
-  for (var j = 0; j < navLinks.length; j++) {
-    var href = navLinks[j].getAttribute('href') || '';
-    if (href === currentPath || href.indexOf(currentPath) !== -1) {
-      navLinks[j].classList.add('active');
+  /* ── Active nav link ─────────────────────────────────────────── */
+  var curPage = window.location.pathname.split('/').pop() || 'index.php';
+  var navAs = document.querySelectorAll('.nav-links a');
+  for (var j = 0; j < navAs.length; j++) {
+    var href = navAs[j].getAttribute('href') || '';
+    if (href && href.indexOf(curPage) !== -1 && curPage !== '') {
+      navAs[j].classList.add('active');
     }
   }
 
-  /* ---- Scroll reveal ---- */
-  function initReveal() {
-    var revealEls = document.querySelectorAll('.reveal');
-    var staggerEls = document.querySelectorAll('.stagger');
-
-    function checkVisible() {
-      var vh = window.innerHeight;
-      for (var k = 0; k < revealEls.length; k++) {
-        var rect = revealEls[k].getBoundingClientRect();
-        if (rect.top < vh - 60) {
-          revealEls[k].classList.add('visible');
-        }
-      }
-      for (var l = 0; l < staggerEls.length; l++) {
-        var sr = staggerEls[l].getBoundingClientRect();
-        if (sr.top < vh - 40) {
-          staggerEls[l].classList.add('visible');
-        }
+  /* ── Scroll reveal ───────────────────────────────────────────── */
+  function checkReveal() {
+    var vh = window.innerHeight;
+    var revs = document.querySelectorAll('.reveal:not(.visible)');
+    for (var k = 0; k < revs.length; k++) {
+      if (revs[k].getBoundingClientRect().top < vh - 70) revs[k].classList.add('visible');
+    }
+    var stags = document.querySelectorAll('.stagger:not(.visible)');
+    for (var l = 0; l < stags.length; l++) {
+      if (stags[l].getBoundingClientRect().top < vh - 50) stags[l].classList.add('visible');
+    }
+    var bars = document.querySelectorAll('.skill-fill[data-w]:not([data-done])');
+    for (var m = 0; m < bars.length; m++) {
+      if (bars[m].getBoundingClientRect().top < vh - 30) {
+        bars[m].style.width = bars[m].getAttribute('data-w') + '%';
+        bars[m].setAttribute('data-done', '1');
       }
     }
-
-    window.addEventListener('scroll', checkVisible, { passive: true });
-    checkVisible(); // run on load
   }
-  initReveal();
+  window.addEventListener('scroll', checkReveal, { passive: true });
+  setTimeout(checkReveal, 200);
 
-  /* ---- Counter animation ---- */
-  function animateCounter(el, target, duration) {
-    var start = 0;
-    var step = target / (duration / 16);
-    var timer = setInterval(function() {
+  /* ── Counter animation ───────────────────────────────────────── */
+  function animCounter(el, target, dur, suffix) {
+    var start = 0, step = target / (dur / 16);
+    var t = setInterval(function() {
       start += step;
-      if (start >= target) {
-        start = target;
-        clearInterval(timer);
-      }
-      var display = Math.floor(start);
-      var suffix = el.getAttribute('data-suffix') || '';
-      el.textContent = display.toLocaleString() + suffix;
+      if (start >= target) { start = target; clearInterval(t); }
+      el.textContent = Math.floor(start).toLocaleString() + (suffix || '');
     }, 16);
   }
-
-  function initCounters() {
-    var counters = document.querySelectorAll('.counter[data-target]');
-    var observed = [];
-    for (var m = 0; m < counters.length; m++) {
-      observed.push(false);
-    }
-
-    function checkCounters() {
-      var vh = window.innerHeight;
-      for (var n = 0; n < counters.length; n++) {
-        if (!observed[n]) {
-          var rect = counters[n].getBoundingClientRect();
-          if (rect.top < vh - 40) {
-            observed[n] = true;
-            animateCounter(counters[n], parseInt(counters[n].getAttribute('data-target')), 2000);
-          }
-        }
+  function checkCounters() {
+    var vh = window.innerHeight;
+    var cnts = document.querySelectorAll('[data-count]:not([data-counted])');
+    for (var n = 0; n < cnts.length; n++) {
+      if (cnts[n].getBoundingClientRect().top < vh - 40) {
+        cnts[n].setAttribute('data-counted', '1');
+        animCounter(cnts[n], parseInt(cnts[n].getAttribute('data-count')), 2000, cnts[n].getAttribute('data-suffix') || '');
       }
     }
-
-    window.addEventListener('scroll', checkCounters, { passive: true });
-    checkCounters();
   }
-  initCounters();
+  window.addEventListener('scroll', checkCounters, { passive: true });
+  setTimeout(checkCounters, 300);
 
-  /* ---- Progress bar animation ---- */
-  function initProgressBars() {
-    var bars = document.querySelectorAll('.progress-bar[data-width]');
-    var observed = [];
-    for (var p = 0; p < bars.length; p++) observed.push(false);
-
-    function checkBars() {
-      var vh = window.innerHeight;
-      for (var q = 0; q < bars.length; q++) {
-        if (!observed[q]) {
-          var rect = bars[q].getBoundingClientRect();
-          if (rect.top < vh - 20) {
-            observed[q] = true;
-            bars[q].style.width = bars[q].getAttribute('data-width') + '%';
-          }
-        }
-      }
-    }
-    window.addEventListener('scroll', checkBars, { passive: true });
-    checkBars();
-  }
-  initProgressBars();
-
-  /* ---- Smooth scroll for anchor links ---- */
-  var anchorLinks = document.querySelectorAll('a[href^="#"]');
-  for (var r = 0; r < anchorLinks.length; r++) {
-    anchorLinks[r].addEventListener('click', function(e) {
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  }
-
-  /* ---- Department tabs ---- */
-  var deptTabs = document.querySelectorAll('.dept-tab');
-  var deptPanels = document.querySelectorAll('.dept-panel');
-  if (deptTabs.length) {
-    for (var s = 0; s < deptTabs.length; s++) {
-      deptTabs[s].addEventListener('click', function() {
-        var target = this.getAttribute('data-tab');
-        for (var t = 0; t < deptTabs.length; t++) deptTabs[t].classList.remove('active');
-        for (var u = 0; u < deptPanels.length; u++) deptPanels[u].classList.remove('active');
-        this.classList.add('active');
-        var panel = document.getElementById('tab-' + target);
-        if (panel) panel.classList.add('active');
-      });
-    }
-  }
-
-  /* ---- Ripple button effect ---- */
-  var btns = document.querySelectorAll('.btn');
-  for (var v = 0; v < btns.length; v++) {
-    btns[v].addEventListener('click', function(e) {
-      var rect = this.getBoundingClientRect();
-      var ripple = document.createElement('span');
-      ripple.className = 'ripple';
-      var size = Math.max(rect.width, rect.height) * 2;
-      ripple.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + (e.clientX - rect.left - size/2) + 'px;top:' + (e.clientY - rect.top - size/2) + 'px';
-      this.appendChild(ripple);
-      setTimeout(function() { ripple.remove(); }, 700);
-    });
-  }
-
-  /* ---- Typed text effect ---- */
-  function initTyped(el, words, speed) {
-    if (!el || !words.length) return;
-    var wordIndex = 0;
-    var charIndex = 0;
-    var deleting = false;
-    var cursor = document.createElement('span');
-    cursor.className = 'typed-cursor';
-    el.parentNode.insertBefore(cursor, el.nextSibling);
-
-    function type() {
-      var current = words[wordIndex];
-      if (deleting) {
-        el.textContent = current.substring(0, charIndex--);
-        if (charIndex < 0) { deleting = false; wordIndex = (wordIndex + 1) % words.length; setTimeout(type, 500); return; }
-        setTimeout(type, speed / 2.5);
+  /* ── Typed text ─────────────────────────────────────────────── */
+  function initTyped(elId, words) {
+    var el = document.getElementById(elId);
+    if (!el) return;
+    var cur = document.createElement('span');
+    cur.className = 'typed-cursor';
+    el.parentNode.insertBefore(cur, el.nextSibling);
+    var wi = 0, ci = 0, del = false;
+    function tick() {
+      var word = words[wi];
+      if (del) {
+        el.textContent = word.substring(0, --ci);
+        if (ci < 0) { del = false; wi = (wi + 1) % words.length; setTimeout(tick, 400); return; }
+        setTimeout(tick, 60);
       } else {
-        el.textContent = current.substring(0, charIndex++);
-        if (charIndex > current.length) { deleting = true; setTimeout(type, 1800); return; }
-        setTimeout(type, speed);
+        el.textContent = word.substring(0, ++ci);
+        if (ci > word.length) { del = true; setTimeout(tick, 1800); return; }
+        setTimeout(tick, 85);
       }
     }
-    type();
+    tick();
   }
+  initTyped('typed', ['Intelligent Platforms', 'AI Solutions', 'Cloud Engineering', 'Enterprise Software', 'Digital Transformation']);
 
-  var typedEl = document.getElementById('typed-text');
-  if (typedEl) {
-    initTyped(typedEl, [
-      'Technology Solutions',
-      'Digital Transformation',
-      'AI & Emerging Tech',
-      'Product Innovation',
-      'Learning & Upskilling',
-      'Content & Media Services'
-    ], 80);
-  }
-
-  /* ---- Particle canvas ---- */
-  function initParticles() {
-    var canvas = document.getElementById('particles-canvas');
-    if (!canvas) return;
+  /* ── Particle canvas ─────────────────────────────────────────── */
+  var canvas = document.getElementById('bg-canvas');
+  if (canvas && canvas.getContext) {
     var ctx = canvas.getContext('2d');
-    var particles = [];
-    var count = 55;
-
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
+    var pts = [];
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
     resize();
     window.addEventListener('resize', resize);
-
-    for (var i = 0; i < count; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        r: Math.random() * 2 + 0.5,
-        alpha: Math.random() * 0.5 + 0.1
-      });
+    for (var p = 0; p < 50; p++) {
+      pts.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 1.5 + 0.5 });
     }
-
     function draw() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (var i = 0; i < particles.length; i++) {
-        var p = particles[i];
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0,200,255,' + p.alpha + ')';
-        ctx.fill();
-
-        // Connect nearby particles
-        for (var j = i + 1; j < particles.length; j++) {
-          var q = particles[j];
-          var dx = p.x - q.x, dy = p.y - q.y;
-          var dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < 110) {
+      for (var i = 0; i < pts.length; i++) {
+        var pt = pts[i];
+        pt.x += pt.vx; pt.y += pt.vy;
+        if (pt.x < 0) pt.x = canvas.width; if (pt.x > canvas.width) pt.x = 0;
+        if (pt.y < 0) pt.y = canvas.height; if (pt.y > canvas.height) pt.y = 0;
+        ctx.beginPath(); ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0,144,255,0.5)'; ctx.fill();
+        for (var j = i + 1; j < pts.length; j++) {
+          var dx = pt.x - pts[j].x, dy = pt.y - pts[j].y;
+          var d = Math.sqrt(dx * dx + dy * dy);
+          if (d < 120) {
             ctx.beginPath();
-            ctx.strokeStyle = 'rgba(0,200,255,' + (0.08 * (1 - dist/110)) + ')';
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.stroke();
+            ctx.strokeStyle = 'rgba(0,144,255,' + (0.09 * (1 - d / 120)) + ')';
+            ctx.lineWidth = 0.6;
+            ctx.moveTo(pt.x, pt.y); ctx.lineTo(pts[j].x, pts[j].y); ctx.stroke();
           }
         }
       }
@@ -277,24 +150,41 @@
     }
     draw();
   }
-  initParticles();
 
-  /* ---- Form validation ---- */
-  var contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-      var valid = true;
-      var inputs = contactForm.querySelectorAll('[required]');
-      for (var i = 0; i < inputs.length; i++) {
-        if (!inputs[i].value.trim()) {
-          inputs[i].style.borderColor = '#f87171';
-          valid = false;
-        } else {
-          inputs[i].style.borderColor = '';
-        }
+  /* ── FAQ accordion ───────────────────────────────────────────── */
+  var faqs = document.querySelectorAll('.faq-item');
+  for (var f = 0; f < faqs.length; f++) {
+    (function(item) {
+      var q = item.querySelector('.faq-q');
+      var a = item.querySelector('.faq-a');
+      if (q && a) {
+        q.addEventListener('click', function() {
+          var open = a.style.display === 'block';
+          // close all
+          for (var x = 0; x < faqs.length; x++) {
+            var fa = faqs[x].querySelector('.faq-a');
+            if (fa) fa.style.display = 'none';
+            faqs[x].classList.remove('open');
+          }
+          if (!open) { a.style.display = 'block'; item.classList.add('open'); }
+        });
       }
-      if (!valid) { e.preventDefault(); }
+    })(faqs[f]);
+  }
+
+  /* ── Smooth scroll anchors ───────────────────────────────────── */
+  var anchors = document.querySelectorAll('a[href^="#"]');
+  for (var s = 0; s < anchors.length; s++) {
+    anchors[s].addEventListener('click', function(e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
     });
+  }
+
+  /* ── BTT button ──────────────────────────────────────────────── */
+  var bttBtn = document.getElementById('btt');
+  if (bttBtn) {
+    bttBtn.addEventListener('click', function() { window.scrollTo({ top: 0, behavior: 'smooth' }); });
   }
 
 })();
